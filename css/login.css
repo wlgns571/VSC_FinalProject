@@ -1,0 +1,176 @@
+/* body{
+    background-color: red;
+} */
+/* 디자인 기본설정 (별은 모든 페이지 속성) */
+*{
+    margin: 0 auto;
+    padding: 0;
+}
+
+body{
+    /* 1vh 높이값이 100분의 1단위
+       예를 들면, 브라우저 높이가 900px
+       1vh는 9px
+    */
+    height: 100vh;
+    background-color: rgba(18, 18, 18, 0.942);
+    text-align: center;
+}
+.form_area {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+.form_area > ul {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+/* 화면 분할 */
+.form_area > ul > li:first-child {
+    margin: 0;
+    width: 40%;
+    list-style: none;
+}
+.form_area > ul > li:last-child {
+    margin: 0;
+    width: 60%;
+    list-style: none;
+    background-color: rgba(18, 18, 18, 0.942);
+}
+.login_bg {
+    width: 100%;
+    height: 100%;
+}
+.login_bg {
+    background: no-repeat;
+    background-size: 100% 100%;
+}
+.login_form{
+    position: relative;
+    top: 30%;
+    width: 400px;
+    margin-left: 20%;
+    background-color: lightsalmon;
+}
+.login_form > h1 {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 60px;
+    padding-bottom: 50px;
+}
+.int-area{
+    width: 400px;
+    background-color: lightskyblue;
+}
+.int-area input{
+    width: 100%;
+    padding: 55px 10px 10px;
+    /* 부모의 배경색을 따라하겠다 = transparent */
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 18px;
+    color: white;
+}
+/* 클릭했을때 나오는 테두리를 보이지 않게 해줌 */
+.int-area input:focus {
+    outline: none;
+}
+.int-area > label {
+    font-size: 18px;
+    color: white;
+}
+.login_form label[for="mem_id"] {
+    position: absolute;
+    top: 150px;
+    left: 10px;
+}
+.login_form label[for="mem_pw"] {
+    position: absolute;
+    top: 240px;
+    left: 10px;
+}
+/* 버튼관련 css */
+.btn-area > button {
+    width: 420px;
+    height: 50px;
+    color: #fff;
+    font-size: 20px;
+    color: #999;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    background-color: #fff;
+    margin-top: 30px;
+    padding: 0 10px 0;
+    cursor: pointer;
+}
+.caption_ul >li {
+    /* li 앞에있는 점을 없애준다 */
+    list-style: none;
+    font-size: 20px;
+}
+.caption_ul {
+    display: flex;
+    margin-top: 20px;
+}
+.caption a {
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+.login_form, .int-area {
+    background-color: transparent;
+}
+/* 포커스시에 색 변환 */
+.int-area input[name="mem_id"]:focus + label {
+    top: 140px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #f58220;
+}
+.int-area input[name="mem_pw"]:focus + label {
+    top: 230px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #f58220 ;
+}
+.int-area label {
+    transition: all .5s ease;
+}
+.int-area input[name="mem_id"]:valid + label {
+    top: 135px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #f58220;
+}
+.int-area input[name="mem_pw"]:valid + label {
+    top: 225px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #f58220;
+}
+.caption_ul a {
+    font-size: 17px;
+}
+#btn_id:active {
+    color: #f58220;
+}
+.caption_ul a:active {
+    font-weight: bold;
+    color: #59c5c7 !important;
+}
+@keyframes warning {
+    from {left: 0px;}
+    to {left: 20px;}
+}
+.int-area label.warning {
+    color: red;
+    animation: warning infinite;
+    animation-duration: 0.03s;
+    animation-duration: leaner;
+    animation-iteration-count: 5;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+}

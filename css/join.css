@@ -1,0 +1,202 @@
+*{margin: 0 auto; padding: 0;}
+body{
+    /* vh는 높이값의 100분 1단위입니다.
+        예를 들어 브라우저 높이값이 900px
+        일때 1vh 는 9px라는 뜻입니다.
+    */
+    height: 100vh;
+    background-color: red;
+    text-align: center;
+}
+.login_form{
+    position: relative;
+    top: 30%;
+    width: 400px;
+}
+.login_form > h1 {
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    /* text-align: center; */
+    font-size: 40px;
+    padding-bottom: 20px;
+}
+.int-area{
+    width: 400px;
+}
+.int-area input{
+    width: 100%;
+    padding: 20px 10px 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid rgb(214, 212, 212);
+    font-size: 18px;
+    color: #fff;
+}
+.int-area input:focus{
+    outline:none;
+}
+.int-area > label{
+    position: absolute;
+ 
+    font-size: 18px;
+    color: white;
+}
+
+.login_form label[for="mem_id"]{
+    left: 15px;
+    top: 80px;
+}
+.login_form label[for="mem_name"]{
+    left: 15px;
+    top: 135px;
+}
+.login_form label[for="mem_pw"]{
+    left: 15px;
+    top: 186px;
+}
+.login_form label[for="mem_pw_check"]{
+    left: 15px;
+    top: 240px;
+}
+.login_form label[for="mem_like_num"]{
+    left: 15px;
+    top: 292px;;
+}
+
+.btn-area{
+    width: 420px;
+}
+.btn-area > button{
+    width: 420px;
+    height: 50px;
+    color: #fff;
+    font-size: 20px;
+    color: #999;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    background-color: #fff;
+    margin-top: 30px;
+    padding: 0 10px 0;
+    cursor: pointer;
+    
+}
+.caption_ul{
+    display: flex;
+    margin-top: 20px;
+}
+.caption_ul > li{
+    list-style: none;
+    font-size: 20px;
+}
+body{
+    background: url("../images/bg_1.jpg") no-repeat center;
+    background-size: cover;
+}
+
+body::before{
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+.login_form{
+    z-index: 2;
+}
+
+.caption a{
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+ 
+#mem_id:focus + label{
+    top: 70px;
+    font-size: 13px;
+    color: #f58220;
+}
+#mem_name:focus + label{
+    top: 125px;
+    font-size: 13px ;
+    color: #f58220;
+}
+#mem_pw:focus + label{
+    top: 178px;
+    font-size: 13px ;
+    color: #f58220;
+}
+#mem_pw_check:focus + label{
+    top: 230px;
+    font-size: 13px ;
+    color: #f58220;
+}
+#mem_like_num:focus + label{
+    top: 285px;
+    font-size: 13px ;
+    color: #f58220;
+}
+
+.int-area label{
+    transition: all .5s ease;
+    /* transition: all 은 top -52px로 이동될때
+        모든 옵션(all)에 대해서 애니매이션 효과를 발생
+        0.5초동안 ease 효과가 천천히 시작되어 
+        중간에 빨라지고 다시 느려짐
+    */
+}
+ 
+#mem_id:valid + label{
+    top: 70px;
+    font-size: 13px;
+    color: #f58220;;
+}
+#mem_name:valid + label{
+    top: 125px;
+    font-size: 13px ;
+    color: #f58220;
+}
+#mem_pw:valid + label{
+    top: 178px;
+    font-size: 13px ;
+    color: #f58220;
+}
+#mem_pw_check:valid + label{
+    top: 230px;
+    font-size: 13px ;
+    color: #f58220;
+}
+#mem_like_num:valid + label{
+    top: 285px;
+    font-size: 13px ;
+    color: #f58220;
+}
+
+.login_form{
+    position: fixed;
+    left: calc( 50% - 200px);
+}
+
+
+.int-area label.warning{
+    color: red;
+    animation-duration: .3s ease;
+    
+}
+/* 버튼클릭액션 */
+#btn_join:active{
+	color: #f58220;;
+    
+}
+
+#check_id{
+	position: absolute;
+	top: 55px;
+	left: 350px;
+	width: 50px;
+	height: 20px;	
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background-color: #166cea;
+}

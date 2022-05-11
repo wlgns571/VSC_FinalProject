@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>NextIT</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@790&display=swap');
+</style>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/forgotpw.css">
+<script>
+$(function(){
+    $("#mem_id").click(function(){
+    	$(this).next().removeClass("warning");
+    }); 
+    $("#mem_like_num").click(function(){
+    	$(this).next().removeClass("warning");
+    });
+});
+ 
+
+function check(){
+	// alert("check");
+
+	let mem_id = $("#mem_id").val().trim();
+	//입력 했는지 여부 확인
+	if($("#mem_id").val() ==""){
+        $("#mem_id").next().addClass("warning");
+        return;
+	}else if($("#mem_like_num").val() =="" ){
+        $("#mem_like_num").next().addClass("warning");
+        return;
+    }      
+
+//1차-1 비밀번호 검증 및 변경 작업 (All-e)
+	//id에 공백이 있는지 확인
+	let pattern = /\s/g;
+	if( mem_id.match(pattern) ) { 
+		alert("ID에 공백이 존재합니다. 다시 입력해주세요"); 
+		$("#mem_id").val("");
+		$("#mem_id").next().addClass("warning");
+		return;	
+	}
+	
+	//like_num 숫자 검증
+	let mem_like_num = $("#mem_like_num").val();
+    //isNaN은 숫자가 아닐 경우 true를 반환
+    if(isNaN(mem_like_num)){
+    	$("#mem_like_num").val("");
+    	alert("입력하신 Like Number가 숫자가 아닙니다.");
+    	return;
+    }else if(mem_like_num > 9 || mem_like_num < 1 ){
+    	$("#mem_like_num").val("");
+    	alert("숫자는 1~9 사이에 입력 해주세요.");
+    	$("#mem_like_num").next().addClass("warning");
+    	return;
+    } 
+
+    let member = localStorage.getItem("memberList");
+    if(member === null || member===undefined || member ===""){
+        console.log("회원 목록을 불러오지 못하였습니다.");
+    }else{
+        
+        let member_list = JSON.parse(member);
+        console.log("member_list.lenght::::::"+member_list.length);
+        
+        for(let i =0 ; i < member_list.length; i++){
+            //console.log("mem_id::::::::::"+member_list[i].mem_id)
+            if(mem_id == member_list[i].mem_id){
+                console.log("아이디가 존재 합니다.");
+                if(mem_like_num == member_list[i].mem_like_num){
+                    console.log("아이디와 넘버가 일치합니다");
+                    
+                    //id를 배열에 pw로 넣어서 패스워드 초기화 진행하기
+                    member_list[i].mem_pw = mem_id ;
+                    console.log("member_list[i].mem_pw::::::"+member_list[i].mem_pw);
+                    
+                    let mem_array_json = JSON.stringify(member_list);
+                    console.log("mem_array_json::::::"+mem_array_json);
+
+                    if (!window.localStorage) {
+                        alert("로컬스토리지를 지원하지 않습니다.");
+                        return;
+                    }
+                    //json으로 저장 
+                    localStorage.setItem("memberList", mem_array_json);
+                    alert("Password has been initialized with your ID.")
+                    location.href ="/finalproject_ajax/login.do";
+                    
+                }else{
+                    alert("아이디 또는 넘버가 올바르지 않습니다.");
+                    return ;
+                }
+            }
+        }
+	}
+}
+</script>
+</head>
+<body>
+     <section class="login_form">
+        <h1>MemWiki</h1> 
+        <form action="">
+            <div class="int-area">
+                <input type="text" id="mem_id" name="mem_id" autocomplete="off" value="" required>
+                <label for=mem_id>USER ID</label>
+            </div>
+            <div class="int-area">
+                <input type="text" id="mem_like_num" name="mem_like_num" autocomplete="off" value="" required>
+                <label for=mem_like_num>NUMBER( the number when joining ) </label>
+            </div>
+            <div class="btn-area">
+                <button type="button"  id="btn_id"name="btn_id" onclick="check()">CHECK</button>
+            </div>
+        </form>    
+    </section>
+</body>
+</html>

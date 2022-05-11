@@ -1,0 +1,80 @@
+#writeArea2 {
+    display: none;
+}
+.writeArea > table {
+    border: 2px solid white;
+    border-radius: 2px;
+    width: 50%;
+    color: white;
+    font-weight: bold;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+.option > select {
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 3px;
+    color: white;
+    margin-left: 14%;
+}
+.inputTitle > input {
+    margin-left: 15px;
+    width: 97%;
+    background-color: black;
+    color: white;
+}
+.textArea > textarea {
+    width: 98%;
+    height: 95%;
+    margin-left: 1%;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.write_footer {
+    display: flex;
+    text-align: center;
+    width: 80%;
+    margin-top: -10px;
+    border: 1px solid white;
+}
+.write_footer > li {
+    margin: 0;
+    width: 50%;
+    cursor: pointer;
+    border: 1px solid white;
+}
+@media(max-width:1166px) {
+    .writeArea > table {
+        border: 2px solid white;
+        border-radius: 2px;
+        width: 70%;
+        color: white;
+        font-weight: bold;
+        margin: auto;
+    }
+    .inputTitle > input {
+        margin-left: 15px;
+        width: 94%;
+        background-color: black;
+        color: white;
+    }
+}
+@media(max-width:525px) {
+    .writeArea > table {
+        border: 2px solid white;
+        border-radius: 2px;
+        width: 90%;
+        color: white;
+        font-weight: bold;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    .inputTitle > input {
+        margin-left: 15px;
+        width: 94%;
+        background-color: black;
+        color: white;
+    }
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>NextIT</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@790&display=swap');
+</style>
+<link rel="icon" type="image/x-icon" href="./images/nextit_log.jpg" />
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/join.css">
+<script>
+
+$(function(){
+    $("#mem_id").click(function(){
+    	$(this).next().removeClass("warning");
+    });   
+    $("#mem_name").click(function(){
+    	$(this).next().removeClass("warning");
+    });
+    $("#mem_pw").click(function(){
+    	$(this).next().removeClass("warning");
+    });
+    $("#mem_pw_check").click(function(){
+    	$(this).next().removeClass("warning");
+    });
+    $("#mem_like_num").click(function(){
+    	$(this).next().removeClass("warning");
+    });
+});
+
+
+function join(){
+    //alert("join");
+    
+    //검증
+    if($("#mem_id").val() ==""){
+        $("#mem_id").next().addClass("warning");
+        return;
+    }else if($("#mem_name").val() =="" ){
+        $("#mem_name").next().addClass("warning");
+        return;
+    }else if($("#mem_pw").val() =="" ){
+        $("#mem_pw").next().addClass("warning");
+        return;
+    }else if($("#mem_pw_check").val() =="" ){
+        $("#mem_pw_check").next().addClass("warning");
+        return;
+    }else if($("#mem_like_num").val() =="" ){
+        $("#mem_like_num").next().addClass("warning");
+        return;
+     }
+    let mem_id = $("#mem_id").val().trim();
+    console.log("mem_id", mem_id);
+    
+    let pattern = /\s/g;
+    if(mem_id.match(pattern)){
+    	alert("ID에 공백이 존재합니다. 다시 입력해주세요");
+    	$("#mem_id").val("");
+    	$("#mem_id").next().addClass("warning");
+    	return;
+    }else if(mem_id.length <4){
+    	alert("ID가 너무 짧습니다. 4글자 이상 입력해주세요");
+    	$("#mem_id").val("");
+    	$("#mem_id").next().addClass("warning");
+    	return;
+    }
+    
+    let mem_name = $("#mem_name").val();
+    console.log("mem_name", mem_name);
+    let mem_pw = $("#mem_pw").val().trim();
+    console.log("mem_pw", mem_pw);
+    if(mem_pw.match(pattern)){
+    	alert("PASSWORD에 공백이 존재합니다. 다시 입력해주세요");
+    	$("#mem_pw").val("");
+    	$("#mem_pw").next().addClass("warning");
+    	return;
+    }else if(mem_pw.length <4){
+    	alert("PASSWORD가 너무 짧습니다. 4글자 이상 입력해주세요");
+    	$("#mem_pw").val("");
+    	$("#mem_pw").next().addClass("warning");
+    	return;
+    }
+    
+    let mem_pw_check = $("#mem_pw_check").val();
+    if(mem_pw != mem_pw_check){
+    	$("#mem_pw_check").val("");
+    	alert("입력하신 비밀번호와 재확인 비밀번호가 틀립니다.");
+    	return;
+    }
+    
+    let mem_like_num = $("#mem_like_num").val();
+    //숫자아닐경우 true 반환
+    if(isNaN(mem_like_num)){
+    	$("#mem_like_num").val("");
+    	alert("입력하신 Like Number가 숫자가 아닙니다.");
+    	return;
+    }else if(mem_like_num>9 || mem_like_num <1 ){
+    	$("#mem_like_num").val("");
+    	alert("숫자는 1~9사이 입력해주세요");
+    	return;
+    }
+    
+    let member_info = {};
+    member_info.mem_id = mem_id;
+    member_info.mem_name = mem_name;
+    member_info.mem_pw = mem_pw;
+    member_info.mem_like_num = mem_like_num;
+    console.log("member_info",member_info);
+    
+    let localStorage = window.localStorage;
+    if(!localStorage){
+    	alert("해당 브라우저는 localStorage를 지원하지 않습니다.");
+    	return;
+    }
+    let member_arr = localStorage.getItem("memberList");
+    if(member_arr === null || member_arr === undefined || member_arr ===""){
+    	member_arr = [];
+    }else{
+    	member_arr = JSON.parse(member_arr);
+    }
+    for(let i=0; i<member_arr.length; i++){
+    	if(member_arr[i].mem_id == member_info.mem_id){
+    		alert("해당 ID가 존재합니다. 다른 ID를 입력해주세요");
+    		$("#mem_id").val("");
+    		return;
+    	}
+    }
+	member_arr.push(member_info);
+	
+	let memberList = JSON.stringify(member_arr);
+	localStorage.setItem("memberList", memberList);
+	alert("회원가입이 완료되었습니다. 확인을 누르시면 로그인 화면으로 이동합니다.");
+	location.href = "/finalproject_ajax/login.do";
+     
+};
+ 
+ 
+</script>
+</head>
+<body>
+    <section class="login_form">
+        <h1>MemWiki</h1> 
+        <form name="loginFrom" method="post">
+            <div class="int-area">
+                <input type="text" id="mem_id" name="mem_id" value="" autocomplete="off"  required>
+                <label for=mem_id>USER ID</label>
+            </div>
+            <div class="int-area">
+                <input type="text" id="mem_name" name="mem_name" value="" autocomplete="off" required>
+                <label for=mem_name>USER NAME</label>
+            </div>
+            <div class="int-area">
+                <input type="password" id="mem_pw" name="mem_pw" value="" autocomplete="off" required>
+                <label for=mem_pw>PASSWORD</label>
+            </div>
+            <div class="int-area">
+                <input type="password" id="mem_pw_check" name="mem_pw_check" value=""  autocomplete="off" required>
+                <label for=mem_pw_check>RECONFIRM PASSWORD</label>
+            </div>
+            <div class="int-area">
+                <input type="text" id="mem_like_num" name="mem_like_num" value="" autocomplete="off" required>
+                <label for=mem_like_num>Like Number 1~9 (To Find ID, PASSWORD)</label>
+            </div>
+            <div class="btn-area">
+                <button type="button"  id="btn_join"name="btn_join" onclick="join()">JOIN</button>
+            </div>
+        </form>    
+    </section>
+    
+</body>
+</html>

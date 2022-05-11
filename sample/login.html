@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="UTF-8">
+<title>MemWiki</title>
+<!-- 웹폰트 -->
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Orbitron:wght@790&display=swap')
+	;
+</style>
+<link rel="stylesheet" type="text/css" href="./css/login.css">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	window.onload = function() {
+		let img_files = [ "./images/twichlogo.gif", "./images/youtube.gif", "./images/netflix.gif" ];
+		let div_img = document.getElementById("img_div");
+		let i = 0;
+
+		function fn_change_img() {
+			console.log("i:::::", i);
+			div_img.style.backgroundImage = "url(" + img_files[i] + ")";
+			if (i == 2) {
+				i = 0;
+			} else {
+				i++;
+			}
+			div_img.style.transitionDuration = "1s";
+		}
+
+		setInterval(function() {
+			fn_change_img();
+		}, 5500);
+		let mem_id_tag = document.getElementById("mem_id").value;
+		let mem_pw_tag = document.getElementById("mem_pw").value;
+
+		mem_id_tag.onclick = function() {
+			document.querySelector(".login_form label[for='mem_id']").classList
+					.remove("warning");
+		}
+		mem_pw_tag.onclick = function() {
+			document.querySelector(".login_form label[for='mem_pw']").classList
+					.remove("warning");
+		}
+	}
+
+	function login() {
+		let mem_id = document.getElementById("mem_id").value;
+		let mem_pw = document.getElementById("mem_pw").value;
+		console.log("mem_id", mem_id);
+		console.log("mem_pw", mem_pw);
+
+		let label_mem_id = document
+				.querySelector(".login_form label[for='mem_id']");
+		let label_mem_pw = document
+				.querySelector(".login_form label[for='mem_pw']");
+		console.log("label_mem_id", label_mem_id);
+		console.log("label_mem_pw", label_mem_pw);
+
+		if (mem_id === null || mem_id === undefined || mem_id === "") {
+			label_mem_id.classList.add("warning");
+			alert("아이디 또는 패스워드가 입력되지 않았습니다.");
+			return false;
+		} else if (mem_pw === null || mem_pw === undefined || mem_pw === "") {
+			label_mem_pw.classList.add("warning");
+			alert("아이디 또는 패스워드가 입력되지 않았습니다.");
+			return false;
+		} else {
+			let localStorage = window.localStorage;
+			if (!localStorage) {
+				alert("해당 브라우저가 localStorage를 지원하지 않습니다. 크롬에서 진행해주세요");
+				return;
+			}
+
+			let memberList = localStorage.getItem("memberList");
+
+			if (memberList === null || memberList === undefined
+					|| memberList === "") {
+				alert("회원목록을 불러오지 못했습니다. 관리자에게 문의해주세요");
+				return;
+			} else {
+				mem_id = $("#mem_id").val();
+				mem_pw = $("#mem_pw").val();
+
+				memberList = JSON.parse(memberList);
+
+				console.log("memberList", memberList);
+				console.log("memberList.length", memberList.length);
+
+				for (let i = 0; i < memberList.length; i++) {
+					//로그인 하려는 id와 localStorage에 있는 id값이 매칭되는 경우
+					if (mem_id == memberList[i].mem_id) {
+						console.log("해당 아이디와 localStorage의 ID와 일치합니다.");
+						if (mem_pw == memberList[i].mem_pw) {
+							console.log("아이디와 패스워드가 일치합니다.")
+							sessionStorage.setItem("mem_id", mem_id);
+							location.href = "/finalproject_ajax/main.do";
+							//alert("로그인완료");
+							return false;
+						} else {
+							alert("아이디 또는 패스워드가 올바르지 않습니다.");
+							return false;
+						}
+					}
+				}
+				alert("아이디가 존재하지 않습니다. 회원가입을 원하시면 join을 눌러주세요")
+			}
+		}
+	}
+	function join() {
+		console.log("join");
+		location.href = "/finalproject_ajax/join.do";
+
+	}
+</script>
+</head>
+
+<body>
+	<div class="form_area">
+		<ul>
+			<li>
+				<div class="login_form">
+					<h1>MemWiki</h1>
+					<form name="loginform" action="">
+						<div class="int-area">
+							<!-- autocomplete 자동완성기능 off는 사용하지 않는다는 뜻 -->
+							<!-- required는 꼭 필요한 값이라는 설정 -->
+							<input type="text" id="mem_id" name="mem_id" value=""
+								autocomplete="off" required> <label for="mem_id">USER
+								ID</label>
+						</div>
+						<div class="int-area">
+							<input type="password" id="mem_pw" name="mem_pw"
+								autocomplete="off" required> <label for="mem_pw">PASSWORD</label>
+						</div>
+						<div class="btn-area">
+							<button type="button" id="btn_id" name="btn_id" onclick="login()">LOGIN</button>
+						</div>
+					</form>
+					<!-- css를 줄것이기 때문에 일단 클래스(여러개 지정가능하기에 아이디를 주지 않는다) 이름을 지정해준다. -->
+					<div class="caption">
+						<ul class="caption_ul">
+							<li><a href="#" onclick="join()">join</a></li>
+							<li>
+								<!-- a태그의 #표시는 여기서만 쓰겠다는 뜻 --> <a href="forGotpw.do" >FORGOT
+									PASSWORD</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div id="img_div" class="login_bg"></div>
+			</li>
+		</ul>
+	</div>
+</body>
+
+</html>

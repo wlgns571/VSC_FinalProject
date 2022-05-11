@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="UTF-8">
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Orbitron:wght@790&display=swap')
+	;
+</style>
+<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/style_main.css">
+<link rel="stylesheet" type="text/css" href="./css/style_boardList.css">
+<link rel="stylesheet" type="text/css" href="./css/style_wirteList.css">
+<link rel="stylesheet" type="text/css" href="./css/style_updateList.css">
+<link rel="stylesheet" type="text/css" href="./css/style_map.css">
+<script type="text/javascript" src="./js/js_list.js"></script>
+<script type="text/javascript" src="./js/js_benner.js"></script>
+<title>Memwiki</title>
+<script>
+	// 텍스트 커서 들어갈 시 발생 이벤트
+	$(document).ready(function() {
+		$(".main_serch>form").on("focusin", function() {
+			$(this).children(".invisible").stop().slideDown();
+		});
+		$(".main_serch>form").on("focusout", function() {
+			$(this).children(".invisible").stop().slideUp();
+		});
+	});
+
+	// 부드러운 스크롤 이동
+	$(document).ready(function() {
+		$('#writeBtn').click(function() {
+			let offset = $('#writeArea2').offset(); //선택한 태그의 위치를 반환
+			//animate()메서드를 이용해서 선택한 태그의 스크롤 위치를 지정해서 0.4초 동안 부드럽게 해당 위치로 이동함 
+			$('html').animate({
+				scrollTop : offset.top
+			}, 400);
+		});
+		$('.goBoard').click(function() {
+			let offset = $('#Board').offset();
+			$('html').animate({
+				scrollTop : offset.top
+			}, 400);
+		});
+		$('.goMap').click(function() {
+			let offset = $('#mapArea2').offset();
+			$('html').animate({
+				scrollTop : offset.top
+			}, 400);
+		});
+		$('.goHome').click(function() {
+			let offset = $('#wrap').offset();
+			$('html').animate({
+				scrollTop : offset.top
+			}, 400);
+		});
+	});
+
+	// 글쓰기 드롭다운
+	function onDisplay() {
+		$('#writeArea2').stop().slideDown();
+	}
+	function offDisplay() {
+		$('#writeArea2').stop().slideUp();
+		let offset = $("#Board").offset();
+		$('html').animate({
+			scrollTop : offset.top
+		}, 400);
+	}
+
+	// 지도 드롭다운
+	function onMap() {
+		$('#mapArea2').stop().slideDown();
+	}
+	function offMap() {
+		$('#mapArea2').stop().slideUp();
+		let offset = $('#wrap').offset();
+		$('html').animate({
+			scrollTop : offset.top
+		}, 400);
+	}
+
+	// 사이드 메뉴바
+	function dp_menu() {
+		let click = document.getElementById("platList2");
+		if (click.style.display === "none") {
+			click.style.display = "block";
+
+		} else {
+			click.style.display = "none";
+
+		}
+	}
+</script>
+</head>
+
+<body>
+	<div id="wrap">
+		<div id="img_div" class="intro_bg">
+			<div class="header">
+				<div class="logoArea">
+					<ul class="logo">
+						<li><a href="#">MEMWIKI</a></li>
+						<li></li>
+					</ul>
+				</div>
+				<div class="navArea">
+					<ul class="nav">
+						<li><a href="main.do">Home</a></li>
+						<li onclick="onRank()" class="onRank"><a href="#">Rank</a></li>
+						<li class="goBoard"><a href="#Board">Board</a></li>
+						<li onclick="onMap()" class="goMap"><a href="#">Co_Map</a></li>
+						<li class="goOut"><a href="javascript:fn_logout()">Logout</a></li>
+						<li class="memOut"><a href="javascript:fn_delete2()">MemOut</a></li>
+					</ul>
+				</div>
+				<input type="checkbox" id="menuicon"> <label for="menuicon">
+					<span></span> <span></span> <span></span>
+				</label>
+				<div class="header_icon">
+					<ul class="menu">
+						<li class="goHome"><a href="#wrap">Home</a></li>
+						<li onclick="onRank()" class="onRank"><a href="#">Rank</a></li>
+						<li class="goBoard"><a href="#Board">Board</a></li>
+						<li onclick="onMap()" class="goMap"><a href="#">Co_Map</a></li>
+						<li class="goOut"><a href="javascript:fn_delete2()">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="main_bg"></div>
+		</div>
+		<div class="main_serch">
+			<h1>MEMWIKI</h1>
+			<form action="board.do">
+				<input type="text" id="input_search" class="input_search2"
+					name="input_search" value="" placeholder="해당 플랫폼 Bj나 스트리머를 검색해주세요.">
+				<button onclick="dp_menu()" class="platform" type="button">
+					<span>트위치</span>
+				</button>
+				<button class="submit" type="submit" onclick="sub_search()">
+					<img
+						src="https://s-lol-web.op.gg/images/icon/icon-gg-white.svg?v=1649380420755"
+						width="30" alt="search" height="15">
+				</button>
+				<div id="recommend" class="invisible">
+					<table style="margin: 0; width: 100%;">
+						<tr>
+							<td style="width: 83%">
+								<div class="list">
+									<ul class="searchList">
+										<li>추천</li>
+										<li>검색어</li>
+									</ul>
+									<ul class="searchList">
+										<li>내용</li>
+										<li>내용</li>
+									</ul>
+								</div>
+							</td>
+							<td style="width: 20%;">
+								<div id="platList2" class="platList" style="display: none;">
+									<ul>
+										<li>아프리카</li>
+										<li>유튜브</li>
+									</ul>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</form>
+		</div>
+		<div id="div_plat">
+			<table>
+				<colgroup>
+					<col width="70">
+					<col width="90">
+					<col width="320">
+					<col width="90">
+					<col width="80">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>스트리머</th>
+						<th>제 목</th>
+						<th>게임이름</th>
+						<th><a href="javascript:fn_chart()">시청자수</a></th>
+					</tr>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+			<div id="modal_graph" style="width: 50%; height: 500px;">
+					<canvas id="myChart"></canvas>
+			</div>
+		</div>
+		<div id="Board" class="main_body">
+			<ul>
+				<li id="banner_left"></li>
+				<li>
+					<div id="div_table">
+						<table>
+							<colgroup>
+								<col width="40">
+								<col>
+								<col width="180">
+								<col width="300">
+							</colgroup>
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>플랫폼</th>
+									<th>제 목</th>
+									<th>작성자</th>
+									<th>시간</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+				</li>
+				<li id="banner_right"></li>
+			</ul>
+			<div class="div_paging">
+				<div class="div_paging_a"></div>
+				<div class="div_board_write">
+					<input type="button" onclick="onDisplay()" style="cursor: pointer;"
+						value="글쓰기" id="writeBtn">
+				</div>
+			</div>
+		</div>
+		<!-- 글쓰기 (hidden) -->
+		<div id="writeArea2" class="writeArea">
+			<table>
+				<tr>
+					<th colspan="2">게시판 글쓰기</th>
+				</tr>
+				<tr>
+					<td class="option" width=50><select id="select_plat">
+							<option value="트위치">트위치</option>
+							<option value="아프리카">아프리카</option>
+							<option value="유튜브">유튜브</option>
+					</select></td>
+					<td class="inputTitle"><input type="text" id="notice_title"
+						placeholder="제목을 입력하세요.(제한 30자)" maxlength=30></td>
+				</tr>
+				<tr>
+					<td class="textArea" colspan="2" height=350><textarea
+							id="notice_content" placeholder="내용을 입력하세요."></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<ul class="write_footer">
+							<li onclick="fn_submit()">글쓰기</li>
+							<li onclick="offDisplay()">목록으로</li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<!-- 게시판 보여주기 -->
+		<div id="updateArea2" class="updateArea">
+			<table>
+				<tr>
+					<th colspan="2">게시판 보기</th>
+				</tr>
+				<tr>
+					<td class="option" width=50><select id="update_plat">
+							<option value="트위치">트위치</option>
+							<option value="아프리카">아프리카</option>
+							<option value="유튜브">유튜브</option>
+					</select></td>
+					<td class="inputTitle"><input type="text" id="update_title"
+						placeholder="제목을 입력하세요.(제한 30자)" maxlength=30 value=""></td>
+				</tr>
+				<tr>
+					<td class="textArea" colspan="2" height=350><textarea
+							id="update_content" name="notice_content"
+							placeholder="내용을 입력하세요."></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<ul class="write_footer">
+							<li id="write_update" onclick="fn_write_update()">수정</li>
+							<li id="write_delete" onclick="fn_write_delete()">삭제</li>
+							<li onclick="offDisplay2()">목록으로</li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="m_benner">
+			<ul>
+				<li id="m_benner_top"></li>
+				<li id="m_benner_bottom"></li>
+			</ul>
+		</div>
+		<!-- 지도 (hidden) -->
+		<div id="mapArea2" class="mapArea">
+			<ul>
+				<li>
+					<div class="map">
+						<iframe
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3822.619140651348!2d127.40583855301652!3d36.32620627910486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35654934390fbbd5%3A0x7c408166d8eb333d!2z7Z2s7JiB7ZWZ7Iig66y47ZmU7J6s64uo!5e0!3m2!1sko!2skr!4v1649761196393!5m2!1sko!2skr"
+							allowfullscreen="" loading="lazy"
+							referrerpolicy="no-referrer-when-downgrade"></iframe>
+					</div>
+				</li>
+				<li>
+					<p>MEMWIKI</p>
+					<p>Copyright © Next IT Edu-Center 2016</p>
+					<p>Tel : 042-719-8850 Fax : 042-719-8851</p>
+					<p>e-Mail : nextit_center@naver.com</p>
+					<p>대전광역시 중구 계룡로 825</p>
+					<p>(용두동, 희영빌딩 2층)</p>
+					<div>
+						<input type="button" onclick="offMap()" style="cursor: pointer;"
+							value="메인으로" id="writeBtn2">
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="modal_div1">
+			<div id="modal_div2" title="클릭하면 창이 닫힙니다.">
+				<form name="loginForm" action="">
+					<div class="int-area">
+						<input type="password" id="mem_pw" name="mem_pw" value=""
+							placeholder="PASSWORD" autocomplete="off" required>
+					</div>
+					<div class="int-area">
+						<input type="password" id="mem_pw_check" name="mem_pw_check"
+							placeholder="RECONFIRM PASSWORD" autocomplete="off" required>
+					</div>
+					<div class="btn-area">
+						<button type="button" id="btn_id" name="btn_id"
+							onclick="fn_change()">CHANGE</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- 6차-3 modal이 뜨는지 확인 하기 위해서(6차-4) -->
+		<div id="modal_div3">
+			<div id="modal_div4" title="클릭하면 창이 닫힙니다.">
+				<!-- modal이 닫히는지 확인하려고  -->
+				<form name="loginForm" action="">
+					<div class="int-area2">
+						<input type="password" id="mem_pw2" name="mem_pw" value=""
+							placeholder="PASSWORD" autocomplete="off" required>
+					</div>
+					<div class="btn-area">
+						<button type="button" id="btn_id2" name="btn_id"
+							onclick="fn_delete()">Membership Withdrawal</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="topBtn"></div>
+	<!-- wrap -->
+</body>
+
+</html>

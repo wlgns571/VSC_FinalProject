@@ -1,0 +1,576 @@
+* {
+	font-family: sans-serif;
+	list-style: none;
+	text-decoration: none;
+	margin: auto;
+	padding: 0;
+}
+
+#wrap {
+	background-color: black;
+}
+
+.intro_bg {
+	width: 100%;
+	height: 720px;
+}
+
+.header {
+	width: 100%;
+	height: 120px;
+	margin: auto;
+}
+
+.logoArea {
+	width: 100%;
+	height: 60px;
+	background-color: rgba(34, 34, 34, 0.514);
+}
+
+.logo {
+	display: flex;
+}
+
+.logo>li {
+	margin-left: 5px;
+	margin-right: 50px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 3px;
+}
+
+.logo>li:first-child {
+	background-color: rgba(0, 0, 0, 0.84);
+}
+
+.logo>li>a {
+	color: white;
+	font-size: 45px;
+	font-weight: bold;
+	font-family: 'Orbitron', sans-serif;
+}
+
+.navArea {
+	width: 100%;
+	height: 60px;
+	background-color: rgba(0, 0, 0, 0.84);
+}
+
+.nav {
+	display: flex;
+	padding-top: 30px;
+}
+
+.nav>li {
+	margin-left: 10px;
+	margin-right: 50px;
+	padding-bottom: 3px;
+}
+
+.nav>li>a {
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: 'Orbitron', sans-serif;
+}
+
+@
+keyframes fade-in {from { opacity:0;
+	
+}
+
+to {
+	opacity: 1;
+}
+
+}
+.nav>li>a:hover {
+	color: orange;
+	border-bottom: 3px solid orange;
+	animation: fade-in .3s;
+	animation-fill-mode: forwards;
+}
+
+.main_bg {
+	width: 100%;
+	height: 600px;
+	background-color: rgba(0, 0, 0, 0.795);
+	background-image:
+		url("../images/—Pngtree—texture\ geometric\ black\ background_930090.jpg");
+	background-size: 100% 100%;
+}
+
+/* 검색창 설정 */
+.main_serch>h1 {
+	font-family: 'Orbitron', sans-serif;
+	font-weight: bold;
+	text-align: center;
+	color: white;
+	padding-bottom: 50px;
+	font-size: 90px;
+}
+
+.main_serch {
+	background-color: rgba(56, 56, 56, 0.169);
+	width: 100%;
+	margin-top: -350px;
+	margin-bottom: 160px;
+}
+
+.main_serch>form {
+	width: 40%;
+	height: 40px;
+	border: none;
+	outline: none;
+	background-color: aliceblue;
+	border-radius: 2px;
+	padding-left: 15px;
+}
+
+.main_serch>form>input {
+	border: none;
+	outline: none;
+	width: 83%;
+}
+
+.platform {
+	border: none;
+	background-color: rgb(255, 124, 81);
+	margin-top: 2px;
+	margin-right: 8px;
+	padding: 8px 8px 8px 8px;
+	cursor: pointer;
+}
+
+.platform>span {
+	color: white;
+	font-weight: bold;
+}
+
+.submit {
+	border: none;
+	background-color: rgba(0, 84, 253, 0.952);
+	margin-top: 2px;
+	padding: 8px 8px 8px 8px;
+	cursor: pointer;
+}
+
+.invisible {
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 3px;
+	width: 100%;
+	display: none;
+}
+
+.list {
+	margin: 0;
+}
+
+.searchList {
+	display: flex;
+}
+
+.list>ul:first-child {
+	background-color: rgb(22, 107, 255);
+	border-radius: 4px 4px 0px 0px;
+}
+
+.list>ul:first-child>li {
+	color: white;
+	font-weight: bold;
+}
+
+.list>ul:last-child {
+	background-color: white;
+	border-radius: 0px 0px 4px 4px;
+	height: 100px;
+}
+
+.platList {
+	width: 40%;
+	margin-left: 6px;
+}
+
+.platList>ul {
+	background-color: white;
+	margin-top: -23px;
+	padding-top: 15px;
+	height: 85px;
+	border-radius: 2px;
+}
+
+.platList>ul>li {
+	background-color: aquamarine;
+	width: 80%;
+	padding: 2px;
+	margin-bottom: 13px;
+	text-align: center;
+	border-radius: 2px;
+}
+
+.platList>ul>li:first-child {
+	font-size: 11px;
+	font-weight: bold;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	color: white;
+	background-color: rgb(22, 107, 255);
+	cursor: pointer;
+}
+
+.platList>ul>li:last-child {
+	font-size: 13px;
+	font-weight: bold;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	background-color: rgb(243, 61, 20);
+	color: white;
+	cursor: pointer;
+}
+
+/* 체크박스 보이지 않게 하기 */
+#menuicon, .header_icon {
+	display: none;
+}
+/* 모달 부분 */
+#modal_div1 {
+	width: 100%;
+	height: 100%;
+	position: fixed; /*스크롤처리*/
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 1;
+	display: none;
+}
+
+#modal_div2 {
+	width: 400px;
+	height: 400px;
+	background-color: rgba(0, 0, 0, 0.8);
+	text-align: center;
+	position: fixed;
+	left: calc(50% - 200px);
+	top: calc(50% - 200px);
+}
+/* 회원탈퇴 모달 */
+#modal_div3 {
+	width: 100%;
+	height: 100%;
+	position: fixed; /*스크롤처리*/
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 1;
+	display: none;
+}
+
+#modal_div4 {
+	width: 400px;
+	height: 300px;
+	background-color: rgba(0, 0, 0, 0.8);
+	text-align: center;
+	position: fixed;
+	left: calc(50% - 200px);
+	top: calc(50% - 200px);
+}
+
+#modal_div2>p {
+	margin-top: 50px;
+}
+
+#modal_div2>a {
+	margin-left: 300px;
+}
+
+form[name="loginForm"] {
+	width: 350px;
+	height: 350px;
+	/* background-color: tomato; */
+	margin-top: 20px;
+}
+
+.int-area {
+	width: 300px;
+	height: 150px;
+	/* background-color: lightblue; */
+}
+
+.int-area:first-child {
+	padding-top: 40px;
+}
+
+.int-area input {
+	width: 80%;
+	padding: 20px 10px 10px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid #f3f3f3;
+	font-size: 18px;
+	color: #f57900;
+}
+/* 회원탈퇴 int-area */
+.int-area2 {
+	margin-top: 50px;
+	width: 300px;
+	height: 100px;
+}
+
+.int-area2:first-child {
+	padding-top: 40px;
+}
+
+.int-area2 input {
+	width: 80%;
+	padding: 20px 10px 10px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid #f3f3f3;
+	font-size: 18px;
+	color: #f57900;
+}
+
+.btn-area>button {
+	width: 70%;
+	height: 40px;
+	font-size: 20px;
+	border: none;
+	border-radius: 15px;
+	background-color: white;
+	position: relative;
+	color: rgba(49, 49, 49, 0.922);
+}
+/* 플랫폼 테이블 */
+#div_plat {
+	display: none;
+}
+
+#div_plat>table {
+	width: 80%;
+	margin-top: 50px;
+	height: 90vh;
+	background-color: rgba(52, 52, 52, 0.557);
+	color: rgba(213, 213, 213, 0.922);
+	border-collapse: collapse;
+}
+
+#div_plat>table>tbody {
+	text-align: center;
+}
+
+#div_plat>table>tbody>tr>td>a {
+	color: rgba(213, 213, 213, 0.922);
+}
+
+#div_plat>table>thead>tr>th>a {
+	color: rgb(249, 107, 55);
+}
+
+#div_plat>table>tbody>tr>td>a:visited {
+	color: rgb(249, 107, 55);
+}
+
+#div_table>table {
+	width: 80%;
+	margin-top: 50px;
+	height: 65vh;
+	background-color: rgba(52, 52, 52, 0.557);
+	color: rgba(213, 213, 213, 0.922);
+	border-collapse: collapse;
+}
+
+#div_table>table>tbody {
+	text-align: center;
+}
+/* 차트 모달 */
+#modal_graph {
+	width: 100%;
+	height: 100%;
+	position: fixed; /*스크롤처리*/
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.9);
+	z-index: 1;
+	display: none;
+}
+
+#myChart {
+	width: 100%;
+	height: 100%;
+	margin-top: 50px;
+}
+/* Top 버튼 */
+#topBtn {
+	position: fixed; /* 포지션 고정 */
+	background:
+		url("../images/iconmonstr-arrow-up-circle-filled-240.png");
+	background-size: cover;
+	width: 60px;
+	height: 60px;
+	right: 2%; /* 오른쪽에서 2% - %도 할수 있음*/
+	bottom: 5px; /* 밑에서 5px */
+	display: none; /* 보여지지 없음 - 기본적으로 안보여지게 */
+	z-index: 2; /* 포지션을 먼저 지정후 z-좌표(레이어) : 9999입니다. */
+	cursor: pointer;
+}
+/* 화면너비 0부터 1600px */
+@media ( max-width :1669px) {
+	.main_serch>form>input {
+		width: 75%;
+	}
+}
+
+@media ( max-width :1166px) {
+	.main_serch>form {
+		width: 55%;
+	}
+	.invisible>table>tbody>tr>td:first-child {
+		width: 65% !important;
+	}
+}
+
+@media ( max-width :525px) {
+	.navArea {
+		display: none;
+	}
+	.logo>li {
+		margin-top: 20px;
+	}
+	.logo>li>a {
+		color: white;
+		font-size: 20px;
+		font-weight: bold;
+		font-family: 'Orbitron', sans-serif;
+	}
+	.main_serch>form {
+		width: 90%;
+	}
+	.main_serch>form>input {
+		width: 72%;
+	}
+	.invisible {
+		margin-left: -18px;
+		margin-right: 0;
+		margin-top: 3px;
+		width: 93%;
+		display: none;
+	}
+	.platList {
+		width: 74%;
+		margin-left: 1px;
+	}
+	.platList>ul>li:first-child {
+		font-size: 10px;
+	}
+	input[id="menuicon"]+label {
+		/* label은 영역이 없지만 영역을 만들어주기 위해 block을 사용함 */
+		display: block;
+		width: 30px;
+		height: 20px;
+		background-color: lightgreen;
+		position: fixed;
+		right: 15px;
+		top: 22px;
+		cursor: pointer;
+	}
+
+	/* span 태그에 가로바 설정 */
+	input[id="menuicon"]+label>span {
+		display: block;
+		width: 100%;
+		height: 4px;
+		background-color: white;
+	}
+
+	/* span 3줄 위치 설정 */
+	input[id="menuicon"]+label span:nth-child(1) {
+		position: absolute;
+		top: 0;
+	}
+	input[id="menuicon"]+label span:nth-child(2) {
+		position: absolute;
+		/* height가 4px이기에 반만 끌어올리면 된다 
+           그러므로 -2px */
+		top: calc(50% - 2px)
+	}
+	input[id="menuicon"]+label span:nth-child(3) {
+		position: absolute;
+		bottom: 0;
+	}
+	.header_icon {
+		display: block;
+	}
+
+	/* 좌측 네비게이션 바 */
+	.header_icon {
+		width: 300px;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.763);
+		position: fixed;
+		top: 0;
+		z-index: 1;
+		right: -300px;
+	}
+
+	/* 클릭 되었을 때 X로 변경하기
+    라벨에 input checkbox를 적용하여 라벨이 클릭되면
+    input태그가 체크 됩니다. 따라서 input태그가 체크된
+    상황이라면 라벨태그 하위에 span태그에 애니메이션 적용 */
+	input[id="menuicon"]:checked+label span:nth-child(1) {
+		top: 55%;
+		transform: rotate(45deg);
+	}
+	input[id="menuicon"]:checked+label span:nth-child(2) {
+		opacity: 0;
+	}
+	input[id="menuicon"]:checked+label span:nth-child(3) {
+		top: 34%;
+		transform: rotate(-45deg);
+	}
+	input[id="menuicon"]:checked+label+div {
+		right: 0;
+	}
+	input[id="menuicon"]+label {
+		z-index: 2;
+		background-color: transparent;
+	}
+	input[id="menuicon"]+label span {
+		border-radius: 30px;
+		transition: all .35s;
+	}
+	.header_icon {
+		transition: all .35s;
+	}
+	.menu {
+		width: 250px;
+		height: 500px;
+		margin: 100px auto;
+	}
+	.menu>li {
+		padding-top: 20px;
+		padding-left: 30px;
+		margin-bottom: 25px;
+	}
+	.menu>li>a {
+		font-size: 20px;
+		color: white;
+		font-weight: bold;
+		font-family: 'Orbitron', sans-serif;
+	}
+	.menu>li>a:hover {
+		color: orange;
+		border-bottom: 3px solid orange;
+		animation: fade-in .3s;
+		animation-fill-mode: forwards;
+	}
+	.menu {
+		background-color: transparent;
+	}
+}
